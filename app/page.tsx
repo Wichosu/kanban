@@ -1,10 +1,19 @@
+'use client';
+
+import { useState, useEffect } from "react";
 import TaskForm from "./components/TaskForm";
 
 export default function Home() {
+  const [todoTasks, setTodoTasks] = useState<string[]>([]);
+
+  function addTodoTask(task: string){
+    setTodoTasks((tasks) => [...tasks, task])
+  }
+
   return (
     <>
       <div className="w-fit mx-auto mt-8">
-        <TaskForm />
+        <TaskForm addTodoTask={addTodoTask} />
       </div>
       <div className="lg:flex justify-evenly text-center uppercase text-3xl text-neutral-800">
         <h1>todo</h1>

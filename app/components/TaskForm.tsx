@@ -1,9 +1,18 @@
 'use client';
 
-import { useState } from "react"
+import { useState, useRef, FormEvent } from "react"
 
-export default function TaskForm(){
-  const [open, setOpen] = useState(false);
+export default function TaskForm({ addTodoTask }: { addTodoTask: (task: string) => void}){
+  const [open, setOpen] = useState<boolean>(false)
+  const task = useRef<HTMLTextAreaElement>(null)
+
+  function addNewTask(e : FormEvent){
+    if(task.current){
+      alert(task.current.value)
+      setOpen(() => false)
+    }
+    e.preventDefault();
+  }    
 
   return (
     <>
@@ -24,8 +33,8 @@ export default function TaskForm(){
         >
           &#9747;
         </div>
-        <form className="flex flex-col gap-6">
-          <textarea rows={4} cols={35} required></textarea>
+        <form className="flex flex-col gap-6" onSubmit={addNewTask}>
+          <textarea rows={4} cols={35} required ref={task}></textarea>
           <button 
             type="submit"
             className="px-4 py-2 bg-neutral-200 rounded-lg text-neutral-800 capitalize
