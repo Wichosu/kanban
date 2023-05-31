@@ -15,7 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} bg-green-200 lg:max-w-6xl mx-auto flex flex-col gap-8`}>
+        {children}
+      </body>
     </html>
   )
 }
