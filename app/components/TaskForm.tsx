@@ -8,8 +8,9 @@ export default function TaskForm({ addTodoTask }: { addTodoTask: (task: string) 
 
   function addNewTask(e : FormEvent){
     if(task.current){
-      alert(task.current.value)
       setOpen(() => false)
+      addTodoTask(task.current.value)
+      task.current.value = ''
     }
     e.preventDefault();
   }    
