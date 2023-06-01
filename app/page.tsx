@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import TaskForm from "./components/TaskForm";
-import Task from "./components/Task";
+import TaskContainer from "./components/TaskContainer";
 
 export default function Home() {
   const [todoTasks, setTodoTasks] = useState<string[]>(() => {
@@ -28,14 +28,9 @@ export default function Home() {
         <TaskForm addTodoTask={addTodoTask} />
       </div>
       <div className="grid grid-cols-3 text-center uppercase text-3xl text-neutral-800">
-        <div className="grow-0 flex flex-col gap-4">
-          <h1>todo</h1>
-          {
-            todoTasks.map((task) => (
-              <Task> { task }</Task>
-            ))
-          }
-        </div>
+        <TaskContainer tasks={todoTasks}>
+          Todo
+        </TaskContainer>
         <h1>doing</h1>
         <h1>done</h1>
       </div>
