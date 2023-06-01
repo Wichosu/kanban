@@ -21,7 +21,7 @@ export default function Home() {
       <div className="w-fit mx-auto mt-8">
         <TaskForm addTodoTask={addTodoTask} />
       </div>
-      <div className="lg:flex justify-evenly text-center uppercase text-3xl text-neutral-800">
+      <div className="grid grid-cols-3 text-center uppercase text-3xl text-neutral-800">
         <div className="grow-0 flex flex-col gap-4">
           <h1>todo</h1>
           {
@@ -30,9 +30,7 @@ export default function Home() {
             ))
           }
         </div>
-        <hr className="grow-0 border-neutral-800 opacity-60 border h-screen" />
         <h1>doing</h1>
-        <hr className="grow-0 border-neutral-800 opacity-60 border h-screen" />
         <h1>done</h1>
       </div>
     </>
