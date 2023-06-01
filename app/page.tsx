@@ -5,14 +5,20 @@ import TaskForm from "./components/TaskForm";
 import Task from "./components/Task";
 
 export default function Home() {
-  const [todoTasks, setTodoTasks] = useState<string[]>([]);
+  const [todoTasks, setTodoTasks] = useState<string[]>(() => {
+    const tasks = localStorage.getItem('todo')
+    if(tasks){
+      return JSON.parse(tasks)
+    }
+    return []
+  })
 
   function addTodoTask(task: string){
     setTodoTasks((tasks) => [...tasks, task])
   }
 
   useEffect(() => {
-    alert(todoTasks)
+    localStorage.setItem('todo', JSON.stringify(todoTasks))
 
   }, [todoTasks])
 
