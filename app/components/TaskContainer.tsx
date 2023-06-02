@@ -1,24 +1,46 @@
 'use client';
 
+import { Data, Status } from "../interfaces";
 import Task from "./Task";
 
-export default function TaskContainer({
-  tasks,
-  children,
-  isDragging,
-  handleDragging
-}: {
-  tasks: string[],
-  children: string,
+interface Props {
+  tasks: Data[],
+  status: Status,
   isDragging: boolean,
-  handleDragging: (dragging: boolean) => void
-}) {
+  handleDragging: (dragging: boolean) => void,
+  handleUpdateList: (id: number, status: Status) => void
+}
+
+export default function TaskContainer({ tasks, status, isDragging, handleDragging, handleUpdateList }: Props) {
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+  }
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    const id = +e.dataTransfer.getData('text')
+    handleUpdateList(id, status)
+    handleDragging(false)
+  }
+
   return (
-    <div className="grow-0 flex flex-col gap-4">
-      <h1>{ children }</h1>
+    <div 
+      className="grow-0 flex flex-col gap-4 h-screen"
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+    >
+      <h1>{ status }</h1>
       {
         tasks.map((task) => (
-          <Task handleDragging={handleDragging}>{ task }</Task>
+          status === task.status 
+          &&
+          <Task 
+            key={ task.id }
+            handleDragging={handleDragging}
+          >
+            { task }
+          </Task>
         ))
       }
     </div>

@@ -1,15 +1,20 @@
 'use client';
 
 import { useState, useRef, FormEvent } from "react"
+import { Data } from "../interfaces";
 
-export default function TaskForm({ addTodoTask }: { addTodoTask: (task: string) => void}){
+export default function TaskForm({ addTodoTask }: { addTodoTask: (task: Data) => void}){
   const [open, setOpen] = useState<boolean>(false)
   const task = useRef<HTMLTextAreaElement>(null)
 
   function addNewTask(e : FormEvent){
     if(task.current){
       setOpen(() => false)
-      addTodoTask(task.current.value)
+      addTodoTask({
+        id: (Math.random() * 100),
+        content: task.current.value,
+        status: "todo"
+      })
       task.current.value = ''
     }
     e.preventDefault();

@@ -1,14 +1,15 @@
+import { Data } from "../interfaces"
 
 export default function Task({ 
   children,
   handleDragging
 } : { 
-  children: string,
+  children: Data,
   handleDragging: (dragging: boolean) => void
 }) {
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    e.dataTransfer.setData('text', children)
+    e.dataTransfer.setData('text', `${children.id}`)
     handleDragging(true)
   }
 
@@ -21,7 +22,7 @@ export default function Task({
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
     >
-      { children }
+      { children.content }
     </div>
   )
 }
