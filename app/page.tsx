@@ -13,14 +13,27 @@ export default function Home() {
     return []
   })
 
+  const [doneTasks, setDoneTasks] = useState<string[]>(() => {
+    const tasks = localStorage.getItem('done')
+    if(tasks){
+      return JSON.parse(tasks)
+    }
+    return []
+  })
+
+  const [isDragging, setIsDragging] = useState(false)
+
+  const handleDragging = (dragging: boolean) => setIsDragging(dragging)
+
   function addTodoTask(task: string){
     setTodoTasks((tasks) => [...tasks, task])
   }
 
   useEffect(() => {
     localStorage.setItem('todo', JSON.stringify(todoTasks))
+    localStorage.setItem('done', JSON.stringify(doneTasks))
 
-  }, [todoTasks])
+  }, [todoTasks, doneTasks])
 
   return (
     <>
@@ -28,10 +41,20 @@ export default function Home() {
         <TaskForm addTodoTask={addTodoTask} />
       </div>
       <div className="grid grid-cols-3 text-center uppercase text-3xl text-neutral-800">
-        <TaskContainer tasks={todoTasks}>
-          Todo
+        <TaskContainer 
+          tasks={todoTasks}
+          isDragging={isDragging}
+          handleDragging={handleDragging}
+        >
+          todo
         </TaskContainer>
-        <h1>doing</h1>
+        <TaskContainer 
+          tasks={doneTasks}
+          isDragging={isDragging}
+          handleDragging={handleDragging}
+        >
+          doing
+        </TaskContainer>
         <h1>done</h1>
       </div>
     </>
