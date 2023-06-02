@@ -43,7 +43,6 @@ export default function TaskForm({ addTodoTask }: { addTodoTask: (task: Data) =>
         <form className="flex flex-col gap-6" onSubmit={addNewTask}>
           <textarea rows={4} cols={35} required ref={task}></textarea>
           <button 
-            type="submit"
             className="px-4 py-2 bg-neutral-200 rounded-lg text-neutral-800 capitalize
             text-base shadow"
           >
