@@ -2,6 +2,7 @@
 
 import { useState, useRef, FormEvent } from "react"
 import { Data } from "../interfaces";
+import { v4 as uuidv4 } from "uuid";
 
 export default function TaskForm({ addTodoTask }: { addTodoTask: (task: Data) => void}){
   const [open, setOpen] = useState<boolean>(false)
@@ -11,7 +12,7 @@ export default function TaskForm({ addTodoTask }: { addTodoTask: (task: Data) =>
     if(task.current){
       setOpen(() => false)
       addTodoTask({
-        id: (Math.random() * 100),
+        id: uuidv4(),
         content: task.current.value,
         status: "todo"
       })

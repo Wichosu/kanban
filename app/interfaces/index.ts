@@ -1,7 +1,7 @@
 export type Status = 'todo' | 'doing' | 'done'
 
 export interface Data {
-  id: number
+  id: string
   content: string
   status: Status
 }
