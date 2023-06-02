@@ -13,7 +13,7 @@ export default function Home() {
 
   const handleDragging = (dragging: boolean) => setIsDragging(dragging)
 
-  const handleUpdateList = (id: number, status: Status) => {
+  const handleUpdateList = (id: string, status: Status) => {
     let task = tasks.find((task) => task.id === id)
 
     if(task && task.status !== status){

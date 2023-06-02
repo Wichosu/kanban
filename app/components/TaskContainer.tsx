@@ -8,7 +8,7 @@ interface Props {
   status: Status,
   isDragging: boolean,
   handleDragging: (dragging: boolean) => void,
-  handleUpdateList: (id: number, status: Status) => void
+  handleUpdateList: (id: string, status: Status) => void
 }
 
 export default function TaskContainer({ tasks, status, isDragging, handleDragging, handleUpdateList }: Props) {
@@ -19,7 +19,7 @@ export default function TaskContainer({ tasks, status, isDragging, handleDraggin
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
-    const id = +e.dataTransfer.getData('text')
+    const id = e.dataTransfer.getData('text')
     handleUpdateList(id, status)
     handleDragging(false)
   }
