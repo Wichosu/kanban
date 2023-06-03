@@ -30,7 +30,7 @@ export default function TaskContainer({ tasks, status, isDragging, handleDraggin
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
-      <h1>{ status }</h1>
+      <h1 className="lg:text-3xl text-xl">{ status }</h1>
       {
         tasks.map((task) => (
           status === task.status 

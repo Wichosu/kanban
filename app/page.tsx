@@ -49,7 +49,7 @@ export default function Home() {
       <div className="w-fit mx-auto mt-8">
         <TaskForm addTodoTask={addTodoTask} />
       </div>
-      <div className="grid grid-cols-3 text-center uppercase text-3xl text-neutral-800">
+      <div className="grid grid-cols-3 text-center uppercase text-neutral-800">
         {
           kanban.map((column) => (
             <TaskContainer
