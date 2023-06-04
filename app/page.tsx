@@ -26,8 +26,12 @@ export default function Home() {
     }
   }
 
-  function addTodoTask(task: Data){
+  const addTask = (task: Data) => {
     setTasks((tasks) => [...tasks, task])
+  }
+
+  const deleteTask = (id: string) => {
+    setTasks((tasks) => tasks.filter((task) => task.id !== id))
   }
 
   useEffect(() => {
@@ -47,7 +51,7 @@ export default function Home() {
   return (
     <>
       <div className="w-fit mx-auto mt-8">
-        <TaskForm addTodoTask={addTodoTask} />
+        <TaskForm addTask={addTask} />
       </div>
       <div className="grid grid-cols-3 text-center uppercase text-neutral-800">
         {
@@ -55,11 +59,13 @@ export default function Home() {
             <TaskContainer
               key={column}
               tasks={tasks}
-
               status={column}
+
               isDragging={isDragging}
               handleDragging={handleDragging}
               handleUpdateList={handleUpdateList}
+
+              deleteTask={deleteTask}
             />
           ))
         }

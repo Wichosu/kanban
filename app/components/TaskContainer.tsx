@@ -9,9 +9,17 @@ interface Props {
   isDragging: boolean,
   handleDragging: (dragging: boolean) => void,
   handleUpdateList: (id: string, status: Status) => void
+  deleteTask: (id: string) => void
 }
 
-export default function TaskContainer({ tasks, status, isDragging, handleDragging, handleUpdateList }: Props) {
+export default function TaskContainer({ 
+  tasks,
+  status,
+  isDragging,
+  handleDragging,
+  handleUpdateList,
+  deleteTask
+}: Props) {
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
@@ -37,10 +45,10 @@ export default function TaskContainer({ tasks, status, isDragging, handleDraggin
           &&
           <Task 
             key={ task.id }
+            task={task}
             handleDragging={handleDragging}
-          >
-            { task }
-          </Task>
+            deleteTask={deleteTask}
+          />
         ))
       }
     </div>

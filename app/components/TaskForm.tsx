@@ -4,21 +4,25 @@ import { useState, useRef, FormEvent } from "react"
 import { Data } from "../interfaces";
 import { v4 as uuidv4 } from "uuid";
 
-export default function TaskForm({ addTodoTask }: { addTodoTask: (task: Data) => void}){
+interface Props {
+  addTask: (task: Data) => void
+}
+
+export default function TaskForm({ addTask }: Props){
   const [open, setOpen] = useState<boolean>(false)
   const task = useRef<HTMLTextAreaElement>(null)
 
   function addNewTask(e : FormEvent){
+    e.preventDefault();
     if(task.current){
       setOpen(() => false)
-      addTodoTask({
+      addTask({
         id: uuidv4(),
         content: task.current.value,
         status: "todo"
       })
       task.current.value = ''
     }
-    e.preventDefault();
   }    
 
   return (
