@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import TaskForm from "./components/TaskForm";
-import TaskContainer from "./components/TaskContainer";
-import { Data, Status } from "./interfaces";
+import TaskForm from "../components/TaskForm";
+import TaskContainer from "../components/TaskContainer";
+import { Data, Status } from "../interfaces";
 
 const kanban: Status[] = ['todo', 'doing', 'done']
 

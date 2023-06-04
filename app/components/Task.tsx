@@ -25,7 +25,7 @@ export default function Task({
 
   return (
     <div 
-      className="bg-neutral-100 text-base lg:text-lg text-justify p-4 w-4/5 mx-auto normal-case
+      className="bg-neutral-100 text-base lg:text-lg text-left p-4 w-4/5 mx-auto normal-case
       relative"
       draggable
       onDragEnd={handleDragEnd}
