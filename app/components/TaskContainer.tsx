@@ -25,10 +25,22 @@ export default function TaskContainer({
 }: Props) {
   const { t }: any = useTranslation(lng, 'TaskContainer')
 
+  /**
+   * 
+   * @param e 
+   * Prevents default behavior of the element when drag is over
+   */
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
   }
 
+  /**
+   * 
+   * @param e 
+   * Handle the data transfer when a task is drop in this element.
+   * gets the id of the task drop and send it to handeUpdateList to update the tasks array
+   * finally, sets the dragging state to false
+   */
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
     const id = e.dataTransfer.getData('text')

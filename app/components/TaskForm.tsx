@@ -11,10 +11,19 @@ interface Props {
 }
 
 export default function TaskForm({ addTask, lng }: Props){
+  //Trigger for the modal
   const [open, setOpen] = useState<boolean>(false)
+  //Ref for the text area that will be the content of the task
   const task = useRef<HTMLTextAreaElement>(null)
   const { t } : any = useTranslation(lng, 'TaskForm')
 
+  /**
+   * 
+   * @param e 
+   * Prevents default behavior of Form.
+   * Checks if the textArea is not null, set open to false for the modal to close
+   * and Finally send an object to addTask function to create a new task
+   */
   function addNewTask(e : FormEvent){
     e.preventDefault();
     if(task.current){

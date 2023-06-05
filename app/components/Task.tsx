@@ -12,6 +12,11 @@ export default function Task({
   deleteTask
 } : Props) {
 
+  /**
+   * 
+   * @param e 
+   * When task is being drag set the id to dataTransfer.setData and update the drag status to true
+   */
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.dataTransfer.setData('text', `${task.id}`)
     handleDragging(true)
@@ -19,6 +24,7 @@ export default function Task({
 
   const handleDragEnd = () => handleDragging(false)
 
+  //Send the id to deleteTask to remove this task
   const handleDelete = (id: string) => {
     deleteTask(id)
   }

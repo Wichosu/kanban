@@ -6,14 +6,25 @@ import TaskContainer from "../components/TaskContainer";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { Data, Status } from "../interfaces";
 
+//Columns of the board
 const kanban: Status[] = ['todo', 'doing', 'done']
 
 export default function Home({ params: { lng }}:{ params: { lng: string }}) {
+  //Array of all tasks
   const [tasks, setTasks] = useState<Data[]>([])
+  //Check if a task is being drag
   const [isDragging, setIsDragging] = useState(false)
 
+  //Set the value of a dragged task
   const handleDragging = (dragging: boolean) => setIsDragging(dragging)
 
+  /**
+   * 
+   * @param id 
+   * @param status 
+   * Update the tasks array, if a task is move to another column change the status
+   * and update the array
+   */
   const handleUpdateList = (id: string, status: Status) => {
     let task = tasks.find((task) => task.id === id)
 
@@ -27,14 +38,27 @@ export default function Home({ params: { lng }}:{ params: { lng: string }}) {
     }
   }
 
+  /**
+   * 
+   * @param task 
+   * Add a new task to the array
+   */
   const addTask = (task: Data) => {
     setTasks((tasks) => [...tasks, task])
   }
 
+  /**
+   * 
+   * @param id 
+   * Remove a task from the array
+   */
   const deleteTask = (id: string) => {
     setTasks((tasks) => tasks.filter((task) => task.id !== id))
   }
 
+  /**
+   * Get the tasks save in localstorage. if not just set an empty array
+   */
   useEffect(() => {
     setTasks(() => {
       const localTasks = localStorage.getItem('tasks')
@@ -45,6 +69,10 @@ export default function Home({ params: { lng }}:{ params: { lng: string }}) {
     })
   }, [])
 
+  /**
+   * Save the state of the array tasks to localstorage. Every change donde to the status
+   * of a task, creation or destruction will trigger this.
+   */
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
