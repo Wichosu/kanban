@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang={lng} dir={dir(lng)}>
-      <body className={`${inter.className} bg-green-200 lg:max-w-6xl mx-auto flex flex-col gap-8`}>
+      <body className={`${inter.className} bg-green-200 lg:max-w-6xl mx-auto flex flex-col gap-6`}>
         {children}
       </body>
     </html>

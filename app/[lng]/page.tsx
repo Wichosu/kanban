@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import TaskForm from "../components/TaskForm";
 import TaskContainer from "../components/TaskContainer";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { Data, Status } from "../interfaces";
 
 const kanban: Status[] = ['todo', 'doing', 'done']
 
-export default function Home() {
+export default function Home({ params: { lng }}:{ params: { lng: string }}) {
   const [tasks, setTasks] = useState<Data[]>([])
   const [isDragging, setIsDragging] = useState(false)
 
@@ -50,7 +51,10 @@ export default function Home() {
 
   return (
     <>
-      <div className="w-fit mx-auto mt-8">
+      <div className="mx-auto mt-6">
+        <LanguageSwitcher lng={lng} />
+      </div>
+      <div className="w-fit mx-auto">
         <TaskForm addTask={addTask} />
       </div>
       <div className="grid grid-cols-3 text-center uppercase text-neutral-800">
