@@ -3,14 +3,17 @@
 import { useState, useRef, FormEvent } from "react"
 import { Data } from "../interfaces";
 import { v4 as uuidv4 } from "uuid";
+import { useTranslation } from "../i18n/client";
 
 interface Props {
-  addTask: (task: Data) => void
+  addTask: (task: Data) => void,
+  lng: string
 }
 
-export default function TaskForm({ addTask }: Props){
+export default function TaskForm({ addTask, lng }: Props){
   const [open, setOpen] = useState<boolean>(false)
   const task = useRef<HTMLTextAreaElement>(null)
+  const { t } : any = useTranslation(lng, 'TaskForm')
 
   function addNewTask(e : FormEvent){
     e.preventDefault();
@@ -32,7 +35,7 @@ export default function TaskForm({ addTask }: Props){
         text-base shadow"
         onClick={() => setOpen(() => true)}
       >
-        create new task
+        { t('trigger') }
       </button>
       <div 
         className={`${open? 'fixed' : 'hidden'} z-10 left-0 right-0 w-fit bg-red-100 mx-auto p-16`}
@@ -50,7 +53,7 @@ export default function TaskForm({ addTask }: Props){
             className="px-4 py-2 bg-neutral-100 rounded-lg text-neutral-800 capitalize
             text-base shadow"
           >
-            create
+            { t('submit') }
           </button>
         </form>
       </div>

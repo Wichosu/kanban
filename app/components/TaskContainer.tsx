@@ -2,11 +2,13 @@
 
 import { Data, Status } from "../interfaces";
 import Task from "./Task";
+import { useTranslation } from "../i18n/client";
 
 interface Props {
   tasks: Data[],
   status: Status,
   isDragging: boolean,
+  lng: string,
   handleDragging: (dragging: boolean) => void,
   handleUpdateList: (id: string, status: Status) => void
   deleteTask: (id: string) => void
@@ -16,10 +18,12 @@ export default function TaskContainer({
   tasks,
   status,
   isDragging,
+  lng,
   handleDragging,
   handleUpdateList,
   deleteTask
 }: Props) {
+  const { t }: any = useTranslation(lng, 'TaskContainer')
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
@@ -38,7 +42,7 @@ export default function TaskContainer({
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
-      <h1 className="lg:text-3xl text-xl">{ status }</h1>
+      <h1 className="lg:text-3xl text-xl">{ t(status) }</h1>
       {
         tasks.map((task) => (
           status === task.status 

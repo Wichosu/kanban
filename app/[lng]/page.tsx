@@ -55,7 +55,7 @@ export default function Home({ params: { lng }}:{ params: { lng: string }}) {
         <LanguageSwitcher lng={lng} />
       </div>
       <div className="w-fit mx-auto">
-        <TaskForm addTask={addTask} />
+        <TaskForm addTask={addTask} lng={lng} />
       </div>
       <div className="grid grid-cols-3 text-center uppercase text-neutral-800">
         {
@@ -64,6 +64,7 @@ export default function Home({ params: { lng }}:{ params: { lng: string }}) {
               key={column}
               tasks={tasks}
               status={column}
+              lng={lng}
 
               isDragging={isDragging}
               handleDragging={handleDragging}
