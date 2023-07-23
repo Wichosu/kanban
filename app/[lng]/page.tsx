@@ -82,8 +82,25 @@ export default function Home({ params: { lng }}:{ params: { lng: string }}) {
       <div className="mx-auto mt-6">
         <LanguageSwitcher lng={lng} />
       </div>
-      <div className="w-fit mx-auto">
+      <div className="flex justify-evenly w-full mx-auto">
         <TaskForm addTask={addTask} lng={lng} />
+        <button className="rounded bg-neutral-100 shadow py-2 px-4 cursor-pointer">
+          Create new board
+        </button>
+        {/**
+         * This is the select board
+         * TODO: 
+         *   -Assign name board#n
+         *   -Figure out how to save multiple tasks in diferent boards
+         *   -Idea create a cookie boards that contains different groups of tasks
+         *   -boards[] = [board1 = tasks[], board2 = tasks[], board3 = tasks[]] and so on
+         */}
+        <select className="rounded bg-neutral-100 shadow py-2 px-4 cursor-pointer">
+          <option>Board name</option>
+          <option>Board name</option>
+          <option>Board name</option>
+          <option>Board name</option>
+        </select>
       </div>
       <div className="grid grid-cols-3 text-center uppercase text-neutral-800">
         {
