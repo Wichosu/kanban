@@ -5,3 +5,9 @@ export interface Data {
   content: string
   status: Status
 }
+
+export interface Board {
+  id: string
+  name: string
+  tasks: []
+}

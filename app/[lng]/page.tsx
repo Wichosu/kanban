@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 import TaskForm from "../components/TaskForm";
 import TaskContainer from "../components/TaskContainer";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
-import { Data, Status } from "../interfaces";
+import { Data, Status, Board } from "../interfaces";
+import BoardForm from "../components/BoardForm";
 
 //Columns of the board
 const kanban: Status[] = ['todo', 'doing', 'done']
 
 export default function Home({ params: { lng }}:{ params: { lng: string }}) {
+  //Array of boards
+  const [boards, setBoards] = useState<Board[]>([])
   //Array of all tasks
   const [tasks, setTasks] = useState<Data[]>([])
   //Check if a task is being drag
@@ -19,7 +22,13 @@ export default function Home({ params: { lng }}:{ params: { lng: string }}) {
   const handleDragging = (dragging: boolean) => setIsDragging(dragging)
 
   /**
-   * 
+   * Add Board
+   */
+  const addBoard = (board: Board) => {
+    setBoards((prevBoards) => [...prevBoards, board])
+  }
+
+  /**
    * @param id 
    * @param status 
    * Update the tasks array, if a task is move to another column change the status
@@ -39,7 +48,6 @@ export default function Home({ params: { lng }}:{ params: { lng: string }}) {
   }
 
   /**
-   * 
    * @param task 
    * Add a new task to the array
    */
@@ -48,7 +56,6 @@ export default function Home({ params: { lng }}:{ params: { lng: string }}) {
   }
 
   /**
-   * 
    * @param id 
    * Remove a task from the array
    */
@@ -84,9 +91,7 @@ export default function Home({ params: { lng }}:{ params: { lng: string }}) {
       </div>
       <div className="flex justify-evenly w-full mx-auto">
         <TaskForm addTask={addTask} lng={lng} />
-        <button className="rounded bg-neutral-100 shadow py-2 px-4 cursor-pointer">
-          Create new board
-        </button>
+        <BoardForm addBoard={addBoard} lng={lng} />
         {/**
          * This is the select board
          * TODO: 
@@ -96,10 +101,11 @@ export default function Home({ params: { lng }}:{ params: { lng: string }}) {
          *   -boards[] = [board1 = tasks[], board2 = tasks[], board3 = tasks[]] and so on
          */}
         <select className="rounded bg-neutral-100 shadow py-2 px-4 cursor-pointer">
-          <option>Board name</option>
-          <option>Board name</option>
-          <option>Board name</option>
-          <option>Board name</option>
+          {
+            boards.map((board, key) => (
+              <option key={key}>{ board.name }</option>
+            ))
+          }
         </select>
       </div>
       <div className="grid grid-cols-3 text-center uppercase text-neutral-800">
